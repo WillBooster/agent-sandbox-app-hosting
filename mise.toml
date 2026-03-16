@@ -1,0 +1,60 @@
+[tools]
+bun = "latest"
+
+[env]
+DATABASE_URL = "file:./drizzle/mount/dev.sqlite3"
+PORT = "3536"
+NODE_ENV = ""
+MISE_ENV = "development"
+NEXT_PUBLIC_BASE_URL = "http://localhost:3536"
+API_KEY = "my-secret-key-2024"
+
+[tasks]
+build = "bun run next build"
+dev = "bun run next dev --turbopack"
+format = "bun run biome format --write ."
+typecheck = "bun run tsc --noEmit --pretty"
+"db:generate" = "bun run drizzle-kit generate"
+"db:seed" = "bun src/db/seed.ts"
+"db:studio" = "bun run drizzle-kit studio"
+
+[tasks."db:migrate"]
+run = ["mkdir -p drizzle/mount", "bun run drizzle-kit migrate"]
+
+[tasks."db:push"]
+run = ["mise run db:migrate", "mise run db:seed"]
+
+[tasks."db:reset"]
+run = ["rm -rf drizzle/mount", "mise run db:push"]
+
+[tasks."stop-server"]
+run = "bun run kill-port ${PORT}"
+
+[tasks.start]
+run = ["mise run db:push", "mise run start-no-db"]
+
+[tasks."start-test-server"]
+run = ["mise run stop-server ::: db:push", "mise run start-no-db"]
+
+[tasks."start-no-db"]
+run = [
+  "mise run stop-server ::: build",
+  "sh -c 'bun run next start -p $PORT; status=$?; [ $status -eq 143 ] || [ $status -eq 130 ] && exit 0; exit $status'",
+]
+
+[tasks.test]
+run = ["MISE_ENV=test mise run stop-server", "MISE_ENV=test mise run db:reset", "MISE_ENV=test bun run playwright test"]
+
+[tasks."start-docker"]
+run = "./scripts/start-docker.sh"
+
+[tasks."test-docker"]
+run = "./scripts/test-docker.sh"
+
+[tasks.deploy]
+run = ["mise run deploy:setup", "bunx @railway/cli up --ci"]
+
+[tasks."deploy:setup"]
+run = [
+  "bunx @railway/cli link --project=\"${RAILWAY_PROJECT_ID}\" --service=\"${RAILWAY_SERVICE_ID}\" --environment=\"${MISE_ENV}\"",
+]

@@ -1,0 +1,7 @@
+**/.idea
+**/*.sqlite3*
+**/.yarn/install-state.gz
+.git
+node_modules
+test-results
+.next

@@ -1,0 +1,54 @@
+# https://hub.docker.com/r/oven/bun
+FROM oven/bun:1.3.10-slim AS build
+
+WORKDIR /app
+
+ENV NODE_ENV=production \
+    HUSKY=0 \
+    MISE_EXPERIMENTAL=true \
+    MISE_INSTALL_PATH="/usr/local/bin/mise" \
+    MISE_TRUSTED_CONFIG_PATHS="/app"
+
+RUN apt-get update \
+    && apt-get -y --no-install-recommends install \
+        curl ca-certificates build-essential python3 \
+    && rm -rf /var/lib/apt/lists/* \
+    && curl https://mise.run | sh
+
+COPY drizzle.config.ts entrypoint.sh mise*.toml next* package.json postcss.config.mjs tsconfig.json bun.lock bunfig.toml ./
+
+RUN bun install --frozen-lockfile
+
+COPY drizzle ./drizzle
+COPY src ./src
+
+ARG MISE_ENV
+ENV MISE_ENV=$MISE_ENV
+
+RUN mise run db:migrate \
+    && mise run build \
+    && rm -rf drizzle/mount
+
+# https://hub.docker.com/r/oven/bun
+FROM oven/bun:1.3.10-slim
+
+WORKDIR /app
+
+ENV PORT=8080 \
+    NODE_ENV=production \
+    TZ=Asia/Tokyo \
+    MISE_EXPERIMENTAL=true \
+    MISE_INSTALL_PATH="/usr/local/bin/mise" \
+    MISE_TRUSTED_CONFIG_PATHS="/app"
+
+RUN apt-get update \
+    && apt-get -y --no-install-recommends install ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=build /usr/local/bin/mise /usr/local/bin/mise
+COPY --from=build /app /app
+
+ARG MISE_ENV
+ENV MISE_ENV=$MISE_ENV
+
+CMD ["./entrypoint.sh"]

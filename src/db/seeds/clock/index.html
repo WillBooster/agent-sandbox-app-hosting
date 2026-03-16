@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>デジタル時計</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Courier New', monospace; display: flex; justify-content: center; align-items: center; min-height: 100vh; background: #1a1a2e; color: #e0e0e0; }
+    .clock { text-align: center; }
+    #time { font-size: 5rem; font-weight: bold; color: #00d4ff; text-shadow: 0 0 20px rgba(0,212,255,0.5); }
+    #date { font-size: 1.2rem; margin-top: 0.5rem; color: #8892b0; }
+  </style>
+</head>
+<body>
+  <div class="clock">
+    <div id="time"></div>
+    <div id="date"></div>
+  </div>
+  <script>
+    function update() {
+      const now = new Date();
+      document.getElementById("time").textContent = now.toLocaleTimeString("ja-JP");
+      document.getElementById("date").textContent = now.toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric", weekday: "long" });
+    }
+    update();
+    setInterval(update, 1000);
+  </script>
+</body>
+</html>
