@@ -56,6 +56,33 @@ mise run test-docker
 mise run start-docker
 ```
 
+## 受講者向け Claude Code スキル
+
+`skills/frontend-app-share/` に、受講者が Claude Code からアプリをアップロードできるスキルを同梱しています。
+
+### セットアップ
+
+受講者のプロジェクトルートで以下を実行してスキルをインストールします。
+
+```bash
+cp -r <このリポジトリのパス>/skills/frontend-app-share .claude/skills/frontend-app-share
+```
+
+次に、環境変数を設定します。
+
+```bash
+export FRONTEND_APP_SHARE_URL="https://<サーバーURL>"
+export FRONTEND_APP_SHARE_API_KEY="<APIキー>"
+```
+
+### 使い方
+
+Claude Code で `/frontend-app-share` と入力すると、アプリのディレクトリを指定してアップロードできます。
+
+```
+/frontend-app-share ./my-app をアップロードして
+```
+
 ## コマンド一覧
 
 | コマンド | 説明 |
