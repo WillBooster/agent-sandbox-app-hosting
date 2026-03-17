@@ -27,7 +27,7 @@ export default async function AppPage({ params }: { params: Promise<{ appId: str
       </header>
       <iframe
         src={`/api/apps/${appId}/files/index.html`}
-        sandbox="allow-scripts allow-same-origin"
+        sandbox="allow-scripts allow-same-origin allow-modals allow-forms allow-downloads allow-popups"
         className="flex-1 w-full border-0"
         title={found.title}
       />
