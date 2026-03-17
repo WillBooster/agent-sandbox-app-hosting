@@ -1,0 +1,18 @@
+name: Deploy production
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+jobs:
+  deploy:
+    uses: WillBooster/reusable-workflows/.github/workflows/deploy.yml@main
+    with:
+      environment: production
+      railway_project_id: 62daa32f-e11c-4b7b-8a2d-3bd7a07e10a7
+      railway_service_id: 6740702a-6657-4686-b8ab-2caca3b5b133
+    secrets:
+      RAILWAY_API_TOKEN: ${{ secrets.RAILWAY_API_TOKEN }}

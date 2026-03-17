@@ -7,7 +7,7 @@ import { uuidv7 } from "uuidv7";
 import { db } from "@/lib/db";
 import { app, appFile } from "@/db/schema";
 
-const appEnv = process.env.MISE_ENV;
+const appEnv = process.env.WB_ENV;
 if (appEnv === "production") {
   console.log("Skipping seed in production environment.");
   process.exit(0);

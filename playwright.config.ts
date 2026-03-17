@@ -1,15 +1,19 @@
 import { devices, defineConfig } from "@playwright/test";
+import { config, populate } from "dotenv";
+import { expand } from "dotenv-expand";
 
-if (process.env.MISE_ENV !== "test") {
-  throw new Error('MISE_ENV must be "test". Run tests with `MISE_ENV=test mise run test`.');
+const envTest = config({ path: ".env.test" });
+const env = config({ path: ".env" });
+expand({ parsed: populate(envTest.parsed ?? {}, env.parsed ?? {}) });
+
+if (process.env.WB_ENV !== "test") {
+  throw new Error('WB_ENV must be "test". Run tests with `WB_ENV=test`.');
 }
 
-const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-if (!baseUrl) {
-  throw new Error(
-    "NEXT_PUBLIC_BASE_URL is required. Run tests via mise with test environment settings.",
-  );
-}
+const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://127.0.0.1:3000";
+const webServerEnv = Object.fromEntries(
+  Object.entries(process.env).filter((entry): entry is [string, string] => typeof entry[1] === "string"),
+);
 
 export default defineConfig({
   forbidOnly: !!process.env.CI,
@@ -25,8 +29,9 @@ export default defineConfig({
     url: baseUrl,
     reuseExistingServer: !!process.env.CI,
     timeout: 300_000,
-    stdout: "ignore",
+    stdout: "pipe",
     stderr: "pipe",
+    env: webServerEnv,
     gracefulShutdown: {
       signal: "SIGTERM",
       timeout: 500,

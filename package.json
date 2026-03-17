@@ -3,10 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "bunx dotenv -e .env -- next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
+    "start": "bunx dotenv -c ${WB_ENV:-development} -- next start",
+    "lint": "eslint",
+    "deploy": "bun run deploy:setup && bun run railway up --ci -m \"${DEPLOY_MESSAGE:-Deploy to Railway}\"",
+    "deploy:setup": "bun run railway link --project=${RAILWAY_PROJECT_ID} --service=${RAILWAY_SERVICE_ID} --environment=${WB_ENV} && bun run railway variables --service=${RAILWAY_SERVICE_ID} --environment=${WB_ENV} --skip-deploys --set=\"DATABASE_URL=file:./drizzle/mount/${WB_ENV}.sqlite3\" --set=\"NODE_ENV=production\" --set=\"WB_ENV=${WB_ENV}\"",
+    "railway": "bunx @railway/cli@latest"
   },
   "dependencies": {
     "@hono/node-server": "^1.19.11",
@@ -29,6 +32,9 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^17.2.3",
+    "dotenv-cli": "^11.0.0",
+    "dotenv-expand": "^12.0.3",
     "drizzle-kit": "^0.31.9",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",

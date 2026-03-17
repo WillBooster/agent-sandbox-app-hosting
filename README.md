@@ -56,6 +56,26 @@ mise run test-docker
 mise run start-docker
 ```
 
+## Railway デプロイ
+
+`main` ブランチに push すると GitHub Actions から Railway の production 環境へ自動デプロイされます。
+
+事前に GitHub Secrets に `RAILWAY_API_TOKEN` を設定してください。
+
+また、実運用に必要な値は Railway 側の Variables に設定してください。
+
+- `API_KEY`
+- 必要に応じて `NEXT_PUBLIC_BASE_URL`
+
+手動デプロイは以下で実行できます。
+
+```bash
+WB_ENV=production \
+RAILWAY_PROJECT_ID=62daa32f-e11c-4b7b-8a2d-3bd7a07e10a7 \
+RAILWAY_SERVICE_ID=6740702a-6657-4686-b8ab-2caca3b5b133 \
+bun run deploy
+```
+
 ## 受講者向け Claude Code スキル
 
 `skills/frontend-app-share/` に、受講者が Claude Code からアプリをアップロードできるスキルを同梱しています。

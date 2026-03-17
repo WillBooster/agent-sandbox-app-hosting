@@ -4,8 +4,11 @@ set -e
 
 source "$(dirname "$0")/docker-common.sh"
 
-# Source test environment variables from mise.
-eval "$(mise env -E test -s bash)"
+# Source test environment variables from .env files.
+set -a
+source ./.env
+source ./.env.test
+set +a
 
 CONTAINER_NAME="frontend-app-share-dev"
 IMAGE_NAME="frontend-app-share:dev"
