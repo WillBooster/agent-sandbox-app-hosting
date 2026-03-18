@@ -14,6 +14,9 @@ if [ -f "$ENV_FILE" ]; then
 fi
 set +a
 
+# Containers always serve on 8080; the host-side port mapping is handled by Docker/Railway.
+export PORT=8080
+
 echo "=== Entrypoint starting ==="
 echo "WB_ENV: $WB_ENV"
 echo "NODE_ENV: $NODE_ENV"
