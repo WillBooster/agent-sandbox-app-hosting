@@ -12,7 +12,9 @@ if (process.env.WB_ENV !== "test") {
 
 const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ?? "http://127.0.0.1:3000";
 const webServerEnv = Object.fromEntries(
-  Object.entries(process.env).filter((entry): entry is [string, string] => typeof entry[1] === "string"),
+  Object.entries(process.env).filter(
+    (entry): entry is [string, string] => typeof entry[1] === "string",
+  ),
 );
 
 export default defineConfig({

@@ -68,11 +68,7 @@ function collectFiles(dir: string): { path: string; content: Buffer; mimeType: s
 }
 
 async function upsertApp(seedApp: SeedAppDef): Promise<void> {
-  const existing = await db
-    .select({ id: app.id })
-    .from(app)
-    .where(eq(app.id, seedApp.id))
-    .limit(1);
+  const existing = await db.select({ id: app.id }).from(app).where(eq(app.id, seedApp.id)).limit(1);
 
   if (existing.length > 0) {
     await db

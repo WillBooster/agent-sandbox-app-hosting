@@ -4,7 +4,9 @@ const list = document.getElementById("todo-list");
 const emptyMsg = document.getElementById("empty-message");
 let todos = JSON.parse(localStorage.getItem("todos") || "[]");
 
-function save() { localStorage.setItem("todos", JSON.stringify(todos)); }
+function save() {
+  localStorage.setItem("todos", JSON.stringify(todos));
+}
 
 function render() {
   list.innerHTML = "";
@@ -13,8 +15,16 @@ function render() {
     const li = document.createElement("li");
     if (t.done) li.classList.add("done");
     li.innerHTML = `<input type="checkbox" ${t.done ? "checked" : ""}><span>${t.text}</span><button>削除</button>`;
-    li.querySelector("input").addEventListener("change", () => { todos[i].done = !todos[i].done; save(); render(); });
-    li.querySelector("button").addEventListener("click", () => { todos.splice(i, 1); save(); render(); });
+    li.querySelector("input").addEventListener("change", () => {
+      todos[i].done = !todos[i].done;
+      save();
+      render();
+    });
+    li.querySelector("button").addEventListener("click", () => {
+      todos.splice(i, 1);
+      save();
+      render();
+    });
     list.appendChild(li);
   });
 }
