@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "frontend-app-share-tmp",
+      "name": "agent-sandbox-app-hosting",
       "dependencies": {
         "@hono/node-server": "^1.19.11",
         "@libsql/client": "^0.17.0",

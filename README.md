@@ -1,4 +1,4 @@
-# frontend-app-share
+# agent-sandbox-app-hosting
 
 生徒が制作したクライアントサイドウェブアプリを教室内で共有するためのサービス。
 
@@ -80,29 +80,29 @@ bun run deploy
 
 ## 受講者向け Claude Code スキル
 
-`skills/frontend-app-share/` に、受講者が Claude Code からアプリをアップロードできるスキルを同梱しています。
+`skills/agent-sandbox-app-hosting/` に、受講者が Claude Code からアプリをアップロードできるスキルを同梱しています。
 
 ### セットアップ
 
 受講者のプロジェクトルートで以下を実行してスキルをインストールします。
 
 ```bash
-cp -r <このリポジトリのパス>/skills/frontend-app-share .claude/skills/frontend-app-share
+cp -r <このリポジトリのパス>/skills/agent-sandbox-app-hosting .claude/skills/agent-sandbox-app-hosting
 ```
 
 次に、環境変数を設定します。
 
 ```bash
-export FRONTEND_APP_SHARE_URL="https://<サーバーURL>"
-export FRONTEND_APP_SHARE_API_KEY="<APIキー>"
+export AGENT_SANDBOX_APP_HOSTING_URL="https://<サーバーURL>"
+export AGENT_SANDBOX_APP_HOSTING_API_KEY="<APIキー>"
 ```
 
 ### 使い方
 
-Claude Code で `/frontend-app-share` と入力すると、アプリのディレクトリを指定してアップロードできます。
+Claude Code で `/agent-sandbox-app-hosting` と入力すると、アプリのディレクトリを指定してアップロードできます。
 
 ```
-/frontend-app-share ./my-app をアップロードして
+/agent-sandbox-app-hosting ./my-app をアップロードして
 ```
 
 ## コマンド一覧

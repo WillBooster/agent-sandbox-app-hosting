@@ -14,7 +14,7 @@ export default async function HomePage() {
       <header className="bg-white border-b border-gray-200 px-6 py-4">
         <div className="max-w-6xl mx-auto flex items-center gap-2">
           <AppWindow className="w-6 h-6 text-blue-600" />
-          <h1 className="text-xl font-bold text-gray-900">frontend-app-share</h1>
+          <h1 className="text-xl font-bold text-gray-900">agent-sandbox-app-hosting</h1>
         </div>
       </header>
 

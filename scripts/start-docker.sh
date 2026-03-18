@@ -10,8 +10,8 @@ source ./.env
 source ./.env.test
 set +a
 
-CONTAINER_NAME="frontend-app-share-dev"
-IMAGE_NAME="frontend-app-share:dev"
+CONTAINER_NAME="agent-sandbox-app-hosting-dev"
+IMAGE_NAME="agent-sandbox-app-hosting:dev"
 
 # Check if container is already running
 if docker_container_running; then
