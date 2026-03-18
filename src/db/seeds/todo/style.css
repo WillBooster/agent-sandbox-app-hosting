@@ -1,15 +1,78 @@
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: sans-serif; display: flex; justify-content: center; padding: 2rem; background: #f0f4f8; }
-.container { width: 100%; max-width: 480px; background: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.1); }
-h1 { margin-bottom: 1rem; color: #333; }
-form { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
-input { flex: 1; padding: 0.6rem; border: 1px solid #d1d5db; border-radius: 8px; font-size: 1rem; }
-button { padding: 0.6rem 1rem; border: none; border-radius: 8px; background: #2563eb; color: #fff; cursor: pointer; font-size: 1rem; }
-button:hover { background: #1d4ed8; }
-ul { list-style: none; }
-li { display: flex; align-items: center; gap: 0.5rem; padding: 0.6rem 0; border-bottom: 1px solid #e5e7eb; }
-li.done span { text-decoration: line-through; color: #9ca3af; }
-li span { flex: 1; }
-li button { background: #ef4444; padding: 0.3rem 0.6rem; font-size: 0.85rem; }
-li button:hover { background: #dc2626; }
-#empty-message { color: #9ca3af; text-align: center; margin-top: 1rem; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: sans-serif;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  background: #f0f4f8;
+}
+.container {
+  width: 100%;
+  max-width: 480px;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+h1 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+form {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+input {
+  flex: 1;
+  padding: 0.6rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+button {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1rem;
+}
+button:hover {
+  background: #1d4ed8;
+}
+ul {
+  list-style: none;
+}
+li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid #e5e7eb;
+}
+li.done span {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+li span {
+  flex: 1;
+}
+li button {
+  background: #ef4444;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.85rem;
+}
+li button:hover {
+  background: #dc2626;
+}
+#empty-message {
+  color: #9ca3af;
+  text-align: center;
+  margin-top: 1rem;
+}

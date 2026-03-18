@@ -52,9 +52,7 @@ run = "./scripts/start-docker.sh"
 run = "./scripts/test-docker.sh"
 
 [tasks.deploy]
-run = ["mise run deploy:setup", "bunx @railway/cli up --ci"]
+run = "bun run deploy"
 
 [tasks."deploy:setup"]
-run = [
-  "bunx @railway/cli link --project=\"${RAILWAY_PROJECT_ID}\" --service=\"${RAILWAY_SERVICE_ID}\" --environment=\"${MISE_ENV}\"",
-]
+run = "bun run deploy:setup"

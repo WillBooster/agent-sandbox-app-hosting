@@ -5,6 +5,7 @@ WORKDIR /app
 
 ENV NODE_ENV=production \
     HUSKY=0 \
+    WB_ENV=production \
     MISE_EXPERIMENTAL=true \
     MISE_INSTALL_PATH="/usr/local/bin/mise" \
     MISE_TRUSTED_CONFIG_PATHS="/app"
@@ -15,15 +16,15 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && curl https://mise.run | sh
 
-COPY drizzle.config.ts entrypoint.sh mise*.toml next* package.json postcss.config.mjs tsconfig.json bun.lock bunfig.toml ./
+COPY .env* drizzle.config.ts entrypoint.sh mise*.toml next* package.json postcss.config.mjs tsconfig.json bun.lock bunfig.toml ./
 
 RUN bun install --frozen-lockfile
 
 COPY drizzle ./drizzle
 COPY src ./src
 
-ARG MISE_ENV
-ENV MISE_ENV=$MISE_ENV
+ARG WB_ENV=production
+ENV WB_ENV=$WB_ENV
 
 RUN mise run db:migrate \
     && mise run build \
@@ -37,6 +38,7 @@ WORKDIR /app
 ENV PORT=8080 \
     NODE_ENV=production \
     TZ=Asia/Tokyo \
+    WB_ENV=production \
     MISE_EXPERIMENTAL=true \
     MISE_INSTALL_PATH="/usr/local/bin/mise" \
     MISE_TRUSTED_CONFIG_PATHS="/app"
@@ -48,7 +50,7 @@ RUN apt-get update \
 COPY --from=build /usr/local/bin/mise /usr/local/bin/mise
 COPY --from=build /app /app
 
-ARG MISE_ENV
-ENV MISE_ENV=$MISE_ENV
+ARG WB_ENV=production
+ENV WB_ENV=$WB_ENV
 
 CMD ["./entrypoint.sh"]

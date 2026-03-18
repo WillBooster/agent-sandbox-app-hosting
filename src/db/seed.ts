@@ -7,7 +7,7 @@ import { uuidv7 } from "uuidv7";
 import { db } from "@/lib/db";
 import { app, appFile } from "@/db/schema";
 
-const appEnv = process.env.MISE_ENV;
+const appEnv = process.env.WB_ENV;
 if (appEnv === "production") {
   console.log("Skipping seed in production environment.");
   process.exit(0);
@@ -68,11 +68,7 @@ function collectFiles(dir: string): { path: string; content: Buffer; mimeType: s
 }
 
 async function upsertApp(seedApp: SeedAppDef): Promise<void> {
-  const existing = await db
-    .select({ id: app.id })
-    .from(app)
-    .where(eq(app.id, seedApp.id))
-    .limit(1);
+  const existing = await db.select({ id: app.id }).from(app).where(eq(app.id, seedApp.id)).limit(1);
 
   if (existing.length > 0) {
     await db

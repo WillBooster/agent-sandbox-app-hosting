@@ -7,7 +7,7 @@ docker_container_running() {
 docker_build_image() {
   log "Building Docker image..."
   docker build -t "$IMAGE_NAME" \
-    --build-arg MISE_ENV="${MISE_ENV}" \
+    --build-arg WB_ENV="${WB_ENV}" \
     .
 }
 

@@ -92,10 +92,7 @@
       "indexes": {
         "app_file_app_id_path_unique": {
           "name": "app_file_app_id_path_unique",
-          "columns": [
-            "app_id",
-            "path"
-          ],
+          "columns": ["app_id", "path"],
           "isUnique": true
         }
       },
@@ -104,12 +101,8 @@
           "name": "app_file_app_id_app_id_fk",
           "tableFrom": "app_file",
           "tableTo": "app",
-          "columnsFrom": [
-            "app_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["app_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }
