@@ -8,7 +8,7 @@
     "start": "bunx dotenv -c ${WB_ENV:-development} -- next start",
     "lint": "eslint",
     "deploy": "bun run deploy:setup && bun run railway up --ci -m \"${DEPLOY_MESSAGE:-Deploy to Railway}\"",
-    "deploy:setup": "bun run railway link --project=${RAILWAY_PROJECT_ID} --service=${RAILWAY_SERVICE_ID} --environment=${WB_ENV} && bun run railway variables --service=${RAILWAY_SERVICE_ID} --environment=${WB_ENV} --skip-deploys --set=\"DATABASE_URL=file:./drizzle/mount/${WB_ENV}.sqlite3\" --set=\"NODE_ENV=production\" --set=\"WB_ENV=${WB_ENV}\"",
+    "deploy:setup": "bun run railway link --project=${RAILWAY_PROJECT_ID} --service=${RAILWAY_SERVICE_ID} --environment=${WB_ENV} && sh -c 'if [ \"${WB_ENV}\" = \"production\" ]; then DB_URL=\"file:/data/production.sqlite3\"; else DB_URL=\"file:./drizzle/mount/${WB_ENV}.sqlite3\"; fi; bun run railway variables --service=${RAILWAY_SERVICE_ID} --environment=${WB_ENV} --skip-deploys --set=\"DATABASE_URL=${DB_URL}\" --set=\"NODE_ENV=production\" --set=\"WB_ENV=${WB_ENV}\"'",
     "railway": "bunx @railway/cli@latest"
   },
   "dependencies": {

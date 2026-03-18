@@ -67,6 +67,8 @@ mise run start-docker
 - `API_KEY`
 - 必要に応じて `NEXT_PUBLIC_BASE_URL`
 
+production では Railway Volume を `/data` にマウントし、`DATABASE_URL=file:/data/production.sqlite3` を使います。
+
 手動デプロイは以下で実行できます。
 
 ```bash
