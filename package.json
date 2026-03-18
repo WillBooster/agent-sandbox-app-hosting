@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "bunx dotenv -e .env -- next dev",
-    "build": "next build",
+    "build": "mise run db:migrate && next build",
     "start": "bunx dotenv -c ${WB_ENV:-development} -- next start",
     "lint": "eslint .",
     "lint-fix": "bun run lint --fix",
