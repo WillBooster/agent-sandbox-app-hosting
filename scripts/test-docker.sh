@@ -10,8 +10,8 @@ source ./.env
 source ./.env.test
 set +a
 
-CONTAINER_NAME="frontend-app-share-test"
-IMAGE_NAME="frontend-app-share:test"
+CONTAINER_NAME="agent-sandbox-app-hosting-test"
+IMAGE_NAME="agent-sandbox-app-hosting:test"
 
 docker_cleanup
 trap docker_cleanup EXIT INT TERM

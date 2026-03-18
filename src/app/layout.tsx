@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "frontend-app-share",
+  title: "agent-sandbox-app-hosting",
   description: "生徒が制作したクライアントサイドウェブアプリを教室内で共有するためのサービス",
 };
 

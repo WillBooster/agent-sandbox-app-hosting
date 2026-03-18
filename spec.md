@@ -1,4 +1,4 @@
-# frontend-app-share 仕様書
+# agent-sandbox-app-hosting 仕様書
 
 生徒が制作したクライアントサイドウェブアプリを教室内で共有するためのサービス。
 
