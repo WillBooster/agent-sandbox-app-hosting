@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       LEFTHOOK: 0
+      WB_ENV: test
       MISE_ENV: test
       MISE_EXPERIMENTAL: "true"
     steps:
