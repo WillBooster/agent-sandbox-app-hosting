@@ -1,7 +1,6 @@
 ---
 name: agent-sandbox-app-hosting
 description: 受講者が制作したウェブアプリを agent-sandbox-app-hosting にアップロードする。アプリのデプロイ、アップロード、共有などを頼まれたときに使用する。
-disable-model-invocation: true
 allowed-tools: Bash(curl *), Glob, Read
 ---
 
