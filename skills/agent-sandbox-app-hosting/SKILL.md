@@ -20,7 +20,6 @@ allowed-tools: Bash(curl *), Glob, Read
 | 環境変数 | 説明 |
 |----------|------|
 | `AGENT_SANDBOX_APP_HOSTING_URL` | サーバーの URL（例: `https://example.com`） |
-| `AGENT_SANDBOX_APP_HOSTING_API_KEY` | 認証用の API キー |
 
 ### 2. アップロード対象ファイルの収集
 
@@ -59,7 +58,6 @@ allowed-tools: Bash(curl *), Glob, Read
 
 ```bash
 curl -X POST "${AGENT_SANDBOX_APP_HOSTING_URL}/api/apps" \
-  -H "Authorization: Bearer ${AGENT_SANDBOX_APP_HOSTING_API_KEY}" \
   -F "title=<タイトル>" \
   -F "description=<説明（任意）>" \
   -F "files=@<ファイルパス>;type=<MIMEタイプ>" \
@@ -90,7 +88,6 @@ curl -X POST "${AGENT_SANDBOX_APP_HOSTING_URL}/api/apps" \
 
 | エラーメッセージ | 原因 | 対処法 |
 |-----------------|------|--------|
-| `Unauthorized` | API キーが正しくない | 環境変数 `AGENT_SANDBOX_APP_HOSTING_API_KEY` の値を確認 |
 | `index.html is required` | index.html が含まれていない | ファイル名を確認し、存在しなければ受講者に作成を依頼 |
 | `title must be between 1 and 100 characters` | タイトルが未指定または長すぎ | 受講者にタイトルを確認 |
 | `Total file size exceeds 50MB limit` | ファイルが大きすぎる | 画像の圧縮や不要ファイルの除外を提案 |

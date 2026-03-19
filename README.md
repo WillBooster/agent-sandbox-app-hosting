@@ -23,7 +23,6 @@ mise run dev
 
 ```bash
 curl -X POST http://localhost:3536/api/apps \
-  -H "Authorization: Bearer my-secret-key-2024" \
   -F "title=デジタル時計" \
   -F "files=@src/db/seeds/clock/index.html;type=text/html"
 ```
@@ -32,7 +31,6 @@ curl -X POST http://localhost:3536/api/apps \
 
 ```bash
 curl -X POST http://localhost:3536/api/apps \
-  -H "Authorization: Bearer my-secret-key-2024" \
   -F "title=カウンターアプリ" \
   -F "description=ボタンをクリックするとカウントが増減するシンプルなアプリです。" \
   -F "files=@src/db/seeds/counter/index.html;type=text/html" \
@@ -64,7 +62,6 @@ mise run start-docker
 
 また、実運用に必要な値は Railway 側の Variables に設定してください。
 
-- `API_KEY`
 - 必要に応じて `NEXT_PUBLIC_BASE_URL`
 
 production では Railway Volume を `/data` にマウントし、`DATABASE_URL=file:/data/production.sqlite3` を使います。
@@ -94,7 +91,6 @@ cp -r <このリポジトリのパス>/skills/agent-sandbox-app-hosting .claude/
 
 ```bash
 export AGENT_SANDBOX_APP_HOSTING_URL="https://<サーバーURL>"
-export AGENT_SANDBOX_APP_HOSTING_API_KEY="<APIキー>"
 ```
 
 ### 使い方
