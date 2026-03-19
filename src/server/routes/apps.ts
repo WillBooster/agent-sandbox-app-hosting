@@ -80,7 +80,7 @@ const appsRoute = new Hono().post("/", async (c) => {
     });
   }
 
-  const url = new URL(`/apps/${appId}`, c.req.url).toString();
+  const url = new URL(`/apps/${appId}`, process.env.NEXT_PUBLIC_BASE_URL ?? c.req.url).toString();
   return c.json({ id: appId, url }, 201);
 });
 
