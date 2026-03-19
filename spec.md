@@ -51,11 +51,8 @@
 
 ## 認証
 
-- 認証は **APIキーによる簡易認証** のみ。ユーザーアカウントは存在しない。
-- 環境変数 `API_KEY` にサービス共通のAPIキーを設定する。
-- 認証が必要なエンドポイントでは `Authorization: Bearer <API_KEY>` ヘッダーで認証する。
-- APIキーが一致しない場合は `401 Unauthorized` を返す。
-- 一覧画面・アプリ配信画面は認証不要。
+- 認証は行わない。ユーザーアカウントは存在しない。
+- 一覧画面・アップロードAPI・アプリ配信画面はすべて認証不要。
 
 ---
 
@@ -75,7 +72,7 @@ Hono を Next.js の Route Handler (`/api/[...path]`) 上にマウントして R
 
 アプリを新規アップロード（デプロイ）する。
 
-**認証:** 必要
+**認証:** 不要
 
 **Content-Type:** `multipart/form-data`
 
@@ -95,7 +92,6 @@ Hono を Next.js の Route Handler (`/api/[...path]`) 上にマウントして R
 
 ```bash
 curl -X POST https://<host>/api/apps \
-  -H "Authorization: Bearer <API_KEY>" \
   -F "title=My App" \
   -F "description=A cool app" \
   -F "files=@index.html;type=text/html" \
@@ -168,7 +164,6 @@ curl -X POST https://<host>/api/apps \
 
 | 変数名 | 説明 | 例 |
 |--------|------|-----|
-| `API_KEY` | アップロード認証用の共通APIキー | `my-secret-key-2024` |
 | `DATABASE_URL` | SQLiteデータベースのパス | `file:./drizzle/mount/dev.sqlite3` |
 
 ---
@@ -192,8 +187,6 @@ src/
 │   ├── routes/
 │   │   ├── apps.ts                      # POST /api/apps エンドポイント
 │   │   └── appFiles.ts                  # /api/apps/:appId/files/* 配信
-│   └── middleware/
-│       └── auth.ts                      # APIキー認証ミドルウェア
 ├── lib/
 │   └── db.ts                            # Drizzle クライアント初期化
 └── db/

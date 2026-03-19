@@ -1,7 +1,5 @@
 import type { APIRequestContext } from "@playwright/test";
 
-export const TEST_API_KEY = "test-api-key";
-
 export async function uploadApp(
   request: APIRequestContext,
   options: {
@@ -45,9 +43,6 @@ export async function uploadApp(
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
     const fetchResponse = await fetch(`${baseUrl}/api/apps`, {
       method: "POST",
-      headers: {
-        Authorization: `Bearer ${TEST_API_KEY}`,
-      },
       body: formData,
     });
 
@@ -59,9 +54,6 @@ export async function uploadApp(
   }
 
   const response = await request.post("/api/apps", {
-    headers: {
-      Authorization: `Bearer ${TEST_API_KEY}`,
-    },
     multipart,
   });
 

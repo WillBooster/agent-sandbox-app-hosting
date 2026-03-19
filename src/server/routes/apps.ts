@@ -2,11 +2,10 @@ import { Hono } from "hono";
 import { uuidv7 } from "uuidv7";
 import { db } from "@/lib/db";
 import { app, appFile } from "@/db/schema";
-import { authMiddleware } from "@/server/middleware/auth";
 
 const MAX_TOTAL_SIZE = 50 * 1024 * 1024; // 50MB
 
-const appsRoute = new Hono().post("/", authMiddleware, async (c) => {
+const appsRoute = new Hono().post("/", async (c) => {
   const body = await c.req.parseBody({ all: true });
 
   const title = body.title;
