@@ -12,15 +12,7 @@ allowed-tools: Bash(curl *), Glob, Read
 
 ## 手順
 
-### 1. 環境変数の確認
-
-以下の環境変数が設定されている必要があります。未設定の場合は受講者に講師へ確認するよう伝えてください。
-
-| 環境変数 | 説明 |
-|----------|------|
-| `AGENT_SANDBOX_APP_HOSTING_URL` | サーバーの URL（例: `https://example.com`） |
-
-### 2. アップロード対象ファイルの収集
+### 1. アップロード対象ファイルの収集
 
 受講者にアプリのディレクトリを指定してもらい、Glob と Read でファイルを確認してください。
 
@@ -30,7 +22,7 @@ allowed-tools: Bash(curl *), Glob, Read
 - ファイルの合計サイズが 50MB 以下であること
 - タイトルが 1〜100 文字であること
 
-### 3. curl コマンドの組み立てと実行
+### 2. curl コマンドの組み立てと実行
 
 収集したファイルをもとに `curl` コマンドを組み立てて実行してください。
 
@@ -56,7 +48,7 @@ allowed-tools: Bash(curl *), Glob, Read
 **curl コマンドの形式:**
 
 ```bash
-curl -X POST "${AGENT_SANDBOX_APP_HOSTING_URL}/api/apps" \
+curl -X POST "https://agent-sandbox-app-hosting.up.railway.app/api/apps" \
   -F "title=<タイトル>" \
   -F "description=<説明（任意）>" \
   -F "files=@<ファイルパス>;type=<MIMEタイプ>" \
@@ -68,7 +60,7 @@ curl -X POST "${AGENT_SANDBOX_APP_HOSTING_URL}/api/apps" \
 - ルート直下のファイル（例: `index.html`）: `filename=` の指定は不要
 - サブディレクトリ内のファイル（例: `css/style.css`）: `filename=css/style.css` のように相対パスを指定
 
-### 4. 結果の報告
+### 3. 結果の報告
 
 アップロードが成功すると以下の JSON が返ります。
 
