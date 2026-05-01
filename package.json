@@ -17,7 +17,7 @@
     "test": "mise run test-docker",
     "test/ci": "mise run test-docker",
     "test/ci-setup": "bun run playwright install --with-deps",
-    "deploy": "bun run deploy:setup && RAILWAY_ENVIRONMENT_ID= bun run railway up --project=${RAILWAY_PROJECT_ID} --service=${RAILWAY_SERVICE_ID} --environment=${WB_ENV} --ci",
+    "deploy": "bun run deploy:setup && env -u RAILWAY_ENVIRONMENT_ID bun run railway up --project=${RAILWAY_PROJECT_ID} --service=${RAILWAY_SERVICE_ID} --environment=${WB_ENV} --ci",
     "deploy:setup": "mise -E ${WB_ENV} run deploy-setup",
     "railway": "bunx @railway/cli@latest"
   },
