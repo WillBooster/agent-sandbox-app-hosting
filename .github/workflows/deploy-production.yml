@@ -1,9 +1,6 @@
 name: Deploy production
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: false
