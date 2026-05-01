@@ -50,7 +50,13 @@ run = "./scripts/start-docker.sh"
 run = "./scripts/test-docker.sh"
 
 [tasks.deploy]
-run = "bun run deploy"
+run = "mise -E ${WB_ENV} run deploy-core"
+
+[tasks."deploy-core"]
+run = [
+  "mise run deploy:setup",
+  "bun run railway up --project=${RAILWAY_PROJECT_ID} --service=${RAILWAY_SERVICE_ID} --environment=${WB_ENV} --ci",
+]
 
 [tasks."deploy:setup"]
-run = "bun run deploy:setup"
+run = "bun run railway variables --service=${RAILWAY_SERVICE_ID} --environment=${WB_ENV} --skip-deploys --set=\"DATABASE_URL=${DATABASE_URL}\" --set=\"NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}\" --set=\"NODE_ENV=${NODE_ENV}\" --set=\"WB_ENV=${WB_ENV}\""
