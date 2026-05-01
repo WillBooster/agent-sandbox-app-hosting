@@ -56,11 +56,11 @@ mise run start-docker
 
 ## Railway デプロイ
 
-`main` ブランチに push すると GitHub Actions から Railway の production 環境へ自動デプロイされます。
+デプロイは手元から `bun run deploy` を実行して行います。
 
-事前に GitHub Secrets に `RAILWAY_API_TOKEN` を設定してください。
+事前に Railway CLI でログインしてください。
 
-また、実運用に必要な値は `.env.production` に設定してください。GitHub Actions では `WB_ENV=production` により `mise.production.toml` から `.env.production` を読み込み、`bun run deploy:setup` で Railway 側の Variables に反映します。
+また、実運用に必要な値は `.env.production` に設定してください。`WB_ENV=production` により `mise.production.toml` から `.env.production` を読み込み、`bun run deploy:setup` で Railway 側の Variables に反映します。
 
 - 必要に応じて `NEXT_PUBLIC_BASE_URL`
 
