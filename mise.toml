@@ -6,10 +6,9 @@ DATABASE_URL = "file:./drizzle/mount/dev.sqlite3"
 PORT = "3536"
 NODE_ENV = ""
 MISE_ENV = "development"
-NEXT_PUBLIC_BASE_URL = "http://localhost:3536"
 
 [tasks]
-build = "bun run next build"
+build = "NEXT_PUBLIC_BASE_URL=\"$(bunx dotenv -e .env -e .env.${WB_ENV:-production} -o -p NEXT_PUBLIC_BASE_URL)\" bun run next build"
 dev = "bun run next dev --turbopack"
 format = "bun run biome format --write ."
 typecheck = "bun run tsc --noEmit --pretty"

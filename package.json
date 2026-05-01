@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "bunx dotenv -e .env -- next dev",
-    "build": "mise run db:migrate && next build",
-    "start": "bunx dotenv -c ${WB_ENV:-development} -- next start",
+    "dev": "bunx dotenv -e .env -o -- next dev",
+    "build": "mise run db:migrate && mise run build",
+    "start": "bunx dotenv -e .env -e .env.${WB_ENV:-development} -o -- next start",
     "lint": "eslint .",
     "lint-fix": "bun run lint --fix",
     "format": "bun run biome format --write .",
@@ -18,7 +18,7 @@
     "test/ci": "mise run test-docker",
     "test/ci-setup": "bun run playwright install --with-deps",
     "deploy": "bun run deploy:setup && bun run railway up --ci -m \"${DEPLOY_MESSAGE:-Deploy to Railway}\"",
-    "deploy:setup": "bun run railway link --project=${RAILWAY_PROJECT_ID} --service=${RAILWAY_SERVICE_ID} --environment=${WB_ENV} && sh -c 'if [ \"${WB_ENV}\" = \"production\" ]; then DB_URL=\"file:/data/production.sqlite3\"; else DB_URL=\"file:./drizzle/mount/${WB_ENV}.sqlite3\"; fi; bun run railway variables --service=${RAILWAY_SERVICE_ID} --environment=${WB_ENV} --skip-deploys --set=\"DATABASE_URL=${DB_URL}\" --set=\"NODE_ENV=production\" --set=\"WB_ENV=${WB_ENV}\"'",
+    "deploy:setup": "bunx dotenv -e .env -e .env.${WB_ENV:-production} -o -- sh -c 'bun run railway link --project=${RAILWAY_PROJECT_ID} --service=${RAILWAY_SERVICE_ID} --environment=${WB_ENV:-production} && bun run railway variables --service=${RAILWAY_SERVICE_ID} --environment=${WB_ENV:-production} --skip-deploys --set=\"DATABASE_URL=${DATABASE_URL}\" --set=\"NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}\" --set=\"NODE_ENV=${NODE_ENV}\" --set=\"WB_ENV=${WB_ENV:-production}\"'",
     "railway": "bunx @railway/cli@latest"
   },
   "dependencies": {

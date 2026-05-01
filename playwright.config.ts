@@ -1,10 +1,9 @@
 import { devices, defineConfig } from "@playwright/test";
-import { config, populate } from "dotenv";
+import { config } from "dotenv";
 import { expand } from "dotenv-expand";
 
-const envTest = config({ path: ".env.test" });
-const env = config({ path: ".env" });
-expand({ parsed: populate(envTest.parsed ?? {}, env.parsed ?? {}) });
+expand(config({ path: ".env", override: true }));
+expand(config({ path: ".env.test", override: true }));
 
 if (process.env.WB_ENV !== "test") {
   throw new Error('WB_ENV must be "test". Run tests with `WB_ENV=test`.');
