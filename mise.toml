@@ -52,5 +52,8 @@ run = "./scripts/test-docker.sh"
 [tasks.deploy]
 run = "bun run deploy"
 
+[tasks."deploy-setup"]
+run = "RAILWAY_ENVIRONMENT_ID= bun run railway variables --service=${RAILWAY_SERVICE_ID} --environment=${WB_ENV} --skip-deploys --set=\"DATABASE_URL=${DATABASE_URL}\" --set=\"NEXT_PUBLIC_BASE_URL=${NEXT_PUBLIC_BASE_URL}\" --set=\"NODE_ENV=${NODE_ENV}\" --set=\"WB_ENV=${WB_ENV}\""
+
 [tasks."deploy:setup"]
 run = "bun run deploy:setup"
