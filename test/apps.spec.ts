@@ -19,6 +19,23 @@ test.describe("POST /api/apps", () => {
     expect(result.url).toContain(`/apps/${result.id}`);
   });
 
+  test("builds returned URL from NEXT_PUBLIC_BASE_URL", async ({ request }) => {
+    const response = await request.post("/api/apps", {
+      multipart: {
+        title: "Configured Base URL App",
+        files: {
+          name: "index.html",
+          mimeType: "text/html",
+          buffer: Buffer.from("<html></html>"),
+        },
+      },
+    });
+
+    expect(response.status()).toBe(201);
+    const result = (await response.json()) as { id: string; url: string };
+    expect(result.url).toBe(`${process.env.NEXT_PUBLIC_BASE_URL}/apps/${result.id}`);
+  });
+
   test("accepts request without auth", async ({ request }) => {
     const response = await request.post("/api/apps", {
       multipart: {
