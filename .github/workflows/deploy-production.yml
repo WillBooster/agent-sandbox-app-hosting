@@ -17,5 +17,4 @@ jobs:
       railway_service_id: 6740702a-6657-4686-b8ab-2caca3b5b133
       server_url: https://agent-sandbox-app-hosting.up.railway.app/
     secrets:
-      DOT_ENV: ${{ secrets.DOT_ENV_PRODUCTION }}
       RAILWAY_API_TOKEN: ${{ secrets.RAILWAY_API_TOKEN }}
