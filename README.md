@@ -60,7 +60,7 @@ mise run start-docker
 
 事前に GitHub Secrets に `RAILWAY_API_TOKEN` を設定してください。
 
-また、実運用に必要な値は `.env.production` に設定してください。`bun run deploy:setup` が Railway 側の Variables に反映します。
+また、実運用に必要な値は `.env.production` に設定してください。GitHub Actions では `DOT_ENV_PRODUCTION` から `.env.production` を読み込み、`bun run deploy:setup` で Railway 側の Variables に反映します。
 
 - 必要に応じて `NEXT_PUBLIC_BASE_URL`
 
