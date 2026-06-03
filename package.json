@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "WB_ENV=development bunx @willbooster/wb@13.21.1 dotenv -- next dev",
+    "dev": "WB_ENV=development bunx @willbooster/wb@13.21.2 dotenv -- next dev",
     "build": "mise run db:migrate && mise run build",
-    "start": "WB_ENV=${WB_ENV:-development} bunx @willbooster/wb@13.21.1 dotenv -- next start",
+    "start": "WB_ENV=${WB_ENV:-development} bunx @willbooster/wb@13.21.2 dotenv -- next start",
     "lint": "eslint .",
     "lint-fix": "bun run lint --fix",
     "format": "bun run biome format --write .",
