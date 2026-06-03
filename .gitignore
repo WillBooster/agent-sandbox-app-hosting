@@ -19,6 +19,9 @@
 
 # production
 /build
+/dist/*
+!/dist/package.json
+!/dist/bun.lock
 
 # misc
 .DS_Store
@@ -43,6 +46,7 @@ drizzle/mount/*.sqlite3-*
 
 # test results
 /test-results
+/.wb
 
 # vercel
 .vercel

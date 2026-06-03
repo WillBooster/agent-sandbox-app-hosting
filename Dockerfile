@@ -16,10 +16,11 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && curl https://mise.run | sh
 
-COPY .env* drizzle.config.ts entrypoint.sh mise*.toml next* package.json postcss.config.mjs tsconfig.json bun.lock bunfig.toml ./
+COPY dist/package.json dist/bun.lock ./
 
 RUN bun install --frozen-lockfile
 
+COPY .env* drizzle.config.ts entrypoint.sh mise*.toml next* postcss.config.mjs tsconfig.json bunfig.toml ./
 COPY drizzle ./drizzle
 COPY src ./src
 

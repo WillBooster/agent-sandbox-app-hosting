@@ -2,6 +2,10 @@
 **/*.sqlite3*
 **/.yarn/install-state.gz
 .git
+.wb
 node_modules
 test-results
 .next
+dist/*
+!dist/package.json
+!dist/bun.lock
