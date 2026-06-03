@@ -12,6 +12,8 @@ set +a
 
 CONTAINER_NAME="agent-sandbox-app-hosting-test"
 IMAGE_NAME="agent-sandbox-app-hosting:test"
+NEXT_PUBLIC_BASE_URL="http://localhost:$PORT"
+export NEXT_PUBLIC_BASE_URL
 
 docker_cleanup
 trap docker_cleanup EXIT INT TERM
@@ -34,9 +36,8 @@ fi
 
 # Run tests and capture exit code
 # Set CI=true to make Playwright reuse the existing Docker container server
-echo "DEBUG: PORT=$PORT NEXT_PUBLIC_BASE_URL=http://localhost:$PORT" >&2
+echo "DEBUG: PORT=$PORT NEXT_PUBLIC_BASE_URL=$NEXT_PUBLIC_BASE_URL" >&2
 set +e
-export NEXT_PUBLIC_BASE_URL="http://localhost:$PORT"
 export CI=true
 bun run playwright test "$@"
 TEST_EXIT_CODE=$?

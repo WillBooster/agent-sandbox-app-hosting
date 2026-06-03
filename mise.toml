@@ -8,7 +8,7 @@ NODE_ENV = ""
 MISE_ENV = "development"
 
 [tasks]
-build = "NEXT_PUBLIC_BASE_URL=\"$(bunx dotenv -e .env -e .env.${WB_ENV:-production} -o -p NEXT_PUBLIC_BASE_URL)\" bun run next build"
+build = "NEXT_PUBLIC_BASE_URL=\"$(env -u PORT WB_ENV=${WB_ENV:-production} bunx @willbooster/wb@13.21.2 dotenv -- sh -c 'printf %s \"$NEXT_PUBLIC_BASE_URL\"')\" bun run next build"
 dev = "bun run next dev --turbopack"
 format = "bun run biome format --write ."
 typecheck = "bun run tsc --noEmit --pretty"
