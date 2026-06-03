@@ -18,7 +18,7 @@ RUN apt-get update \
 
 COPY .env* drizzle.config.ts entrypoint.sh mise*.toml next* package.json postcss.config.mjs tsconfig.json bun.lock bunfig.toml ./
 
-RUN bun install --frozen-lockfile
+RUN bun install
 
 COPY drizzle ./drizzle
 COPY src ./src
