@@ -8,6 +8,7 @@ docker_build_image() {
   log "Building Docker image..."
   docker build -t "$IMAGE_NAME" \
     --build-arg WB_ENV="${WB_ENV}" \
+    --build-arg NEXT_PUBLIC_BASE_URL="${NEXT_PUBLIC_BASE_URL}" \
     .
 }
 

@@ -24,10 +24,11 @@ COPY drizzle ./drizzle
 COPY src ./src
 
 ARG WB_ENV=production
+ARG NEXT_PUBLIC_BASE_URL
 ENV WB_ENV=$WB_ENV
 
 RUN mise run db:migrate \
-    && mise run build \
+    && if [ -n "$NEXT_PUBLIC_BASE_URL" ]; then NEXT_PUBLIC_BASE_URL="$NEXT_PUBLIC_BASE_URL" mise run build; else mise run build; fi \
     && rm -rf drizzle/mount
 
 # https://hub.docker.com/r/oven/bun
